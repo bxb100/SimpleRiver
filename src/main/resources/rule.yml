@@ -1,0 +1,28 @@
+source: mongodb://192.168.31.127:27017
+sourceDatabase: websites
+sink: https://elastic:elastic@localhost:9200
+sinkIndex: river_index
+threadNumber: 5
+rules:
+  - collection: surugaya
+    extra:
+      from: surugaya
+    patterns:
+      - ori: _id
+        replace: id
+      - ori: detail
+        replace: content
+      - ori: lastCrawled
+        replace: indexTime
+      - ori: _class
+        exclude: true
+  - collection: toranoana
+    extra:
+      from: toranoana
+    patterns:
+      - ori: _id
+        replace: id
+      - ori: detail
+        replace: content
+      - ori: _class
+        exclude: true
